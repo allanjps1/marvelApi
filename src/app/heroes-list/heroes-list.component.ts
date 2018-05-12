@@ -22,17 +22,32 @@ export class HeroesListComponent implements OnInit {
   private marvelApiUrl: string = 'https://gateway.marvel.com:443';
   private charactersUrl: string = '/v1/public/characters?ts=1&apikey=a5f1e3b83db62cae20ee545f968d71ee'
 
+  data: any[];
+  public heroes: Heroe[];
+
   constructor(private http: Http) {
+  }
+
+  getCharacters(): Observable<Heroe[]> {
 
     let requestUrl = this.marvelApiUrl + this.charactersUrl;
 
-    this.http.get(requestUrl)
-      .map((response: Response) => <Heroe>response.json().data.results)
-      .do((data: Heroe) => console.log(data))
-      .subscribe();
+    return this.http.get(requestUrl)
+      .map((response: Response) => {
+        return response.json().data.results.map(item => {
+          return new Heroe(
+            item.id,
+            item.name,
+            item.description
+          );
+        });
+      });
   }
 
   ngOnInit() {
+    this.getCharacters().subscribe((data) => {
+      this.heroes = data;
+    });
   }
 
 }
