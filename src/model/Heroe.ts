@@ -1,16 +1,22 @@
 export class Heroe {
 
-    private _Id: number;
-    private _Name: string;
-    private _Description: string;
+    private Id: number;
+    private Name: string;
+    private Description: string;
+    private ImgPath: string;
+    private ImgExtension: string;
 
     constructor(
-        Id: number,
-        Name: string,
-        Description: string
+        _Id: number,
+        _Name: string,
+        _Description: string,
+        _ImgPath: string,
+        _ImgExtension: string,
     ) { 
-        this._Id = Id;
-        this._Name = Name;
-        this._Description = Description;
+        this.Id = _Id;
+        this.Name = _Name;
+        this.Description = _Description;
+        this.ImgPath = _ImgPath;
+        this.ImgExtension = _ImgExtension;
     }
 }
